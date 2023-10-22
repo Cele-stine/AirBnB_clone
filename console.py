@@ -111,12 +111,16 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print([str(obj) for obj in storage.all().values()])
-        elif args[0] in self.classes:
+        elif len(args) == 1:
             class_name = args[0]
-            print([str(obj) for key, obj in storage.all().items()
-                   if class_name in key])
+            if class_name in self.classes:
+                cls = self.classes[class_name]
+                instances = cls.all()
+                print([str(obj) for obj in instances])
+            else:
+                print("** class doesn't exist **")
         else:
-            print("** class doesn't exist **")
+            print("** syntax dosn't exist **")
 
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or

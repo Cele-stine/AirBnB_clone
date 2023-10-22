@@ -59,3 +59,7 @@ class BaseModel:
         my_dict["updated_at"] = my_dict["updated_at"].isoformat()
         my_dict['first_name'] = self.first_name
         return my_dict
+
+    def all(cls):
+        """Return a list of all instances of thes class."""
+        return [inatance for instance in storage.all().values() if isinstance(instance, cls)]
